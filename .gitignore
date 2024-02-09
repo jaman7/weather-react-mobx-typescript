@@ -12,13 +12,26 @@ dist
 dist-ssr
 *.local
 
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
 # Editor directories and files
+debug.log
 .vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 !.vscode/extensions.json
-.idea
+.history/*
+
+# System Files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+node/
+target/
+package-lock.json
