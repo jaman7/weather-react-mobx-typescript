@@ -1,0 +1,11 @@
+@use "sass:math";
+// bootstrap 5
+@import "./bootstrap";
+// @import "./fontawesome";
+@import "weathericons/sass/weather-icons";
+// plugins
+@import "plugins/plugins";
+// variables
+@import "./variables";
+@import "./mixins";
+@import "./componets/base";
