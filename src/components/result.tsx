@@ -3,7 +3,9 @@ import uuid from 'react-uuid';
 import VisibilitySensor from 'react-visibility-sensor';
 import Forecast from './forecast';
 import Daily from './daily';
+import ScrollContainer from 'react-indiana-drag-scroll';
 import { IWeatherStoreProps } from '../interfaces/interfaces';
+import { useEffect, useRef } from 'react';
 
 const Result = inject('WeatherStore')(
   observer((props: IWeatherStoreProps) => {
@@ -31,6 +33,14 @@ const Result = inject('WeatherStore')(
       sunsetSunrise,
     } = WeatherStore || {};
 
+    const ref = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+      ref.current?.scrollTo?.({
+        left: 1600,
+      });
+    }, []);
+
     const dailyDate = (utc: number | null): string => {
       return utc ? new Date(utc * 1000).toLocaleDateString() : '';
     };
@@ -57,10 +67,10 @@ const Result = inject('WeatherStore')(
       <>
         <div className="row">
           <div className="col-12 box-title">
-            <h2 className="p-4">
+            <h2 className="ps-4 mt-4">
               {city}, {country}
             </h2>
-            <h4 className="pl-4">{date}</h4>
+            <h4 className="ps-4 mb-3">{date}</h4>
           </div>
           <div className="col-12 col-md-6 box-current">
             <div className="box1">
@@ -93,18 +103,23 @@ const Result = inject('WeatherStore')(
           </div>
 
           <div className="col-12">
-            <div className="box3 scroll">
-              {forecast &&
-                forecast.map((el, i) => (
-                  <Forecast
-                    key={i}
-                    temp={Math.floor(el?.main?.temp * 1) / 1}
-                    icon={el?.weather?.[0]?.icon ?? ''}
-                    month={el?.dt_txt?.slice(5, 7)}
-                    day={el?.dt_txt?.slice(8, 10)}
-                    hour={el?.dt_txt?.slice(11, 13)}
-                  />
-                ))}
+            <div className="box3">
+              <ScrollContainer
+                hideScrollbars={false}
+                className="scroll-container"
+              >
+                {forecast &&
+                  forecast.map((el, i) => (
+                    <Forecast
+                      key={i}
+                      temp={Math.floor(el?.main?.temp * 1) / 1}
+                      icon={el?.weather?.[0]?.icon ?? ''}
+                      month={el?.dt_txt?.slice(5, 7)}
+                      day={el?.dt_txt?.slice(8, 10)}
+                      hour={el?.dt_txt?.slice(11, 13)}
+                    />
+                  ))}
+              </ScrollContainer>
             </div>
           </div>
         </div>

@@ -1,0 +1,32 @@
+%scrollbar-h {
+  $scrollbar-h-size: 12px;
+
+  &::-webkit-scrollbar {
+    height: $scrollbar-h-size;
+    background: rgba($colorGray, 20%);
+
+    &-track {
+      border-radius: calc(12px / 2);
+      background: rgba($colorGray, 20%);
+    }
+
+    &-thumb {
+      padding-top: 3px;
+      border-radius: calc(12px / 2);
+      background-color: $bg-white;
+      background-clip: content-box;
+      min-width: 100px;
+      cursor: pointer;
+
+      &:hover,
+      &:active {
+        background: darken($bg-white, 5%);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+%textshadownocolor {
+  text-shadow: 2px 2px #f00;
+}
