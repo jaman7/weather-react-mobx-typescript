@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# weather + React + TypeScript + MOBX + Vite
 
 ## Use git clone.
 
