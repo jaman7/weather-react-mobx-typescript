@@ -11,18 +11,7 @@ interface IProps {
   front?: string;
 }
 
-const Daily = ({
-  date,
-  day,
-  sunset,
-  sunrise,
-  icon,
-  description,
-  tempDay,
-  tempMorning,
-  tempNight,
-  front,
-}: IProps) => {
+const Daily = ({ date, day, sunset, sunrise, icon, description, tempDay, tempMorning, tempNight, front }: IProps) => {
   const iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
   return (
     <>

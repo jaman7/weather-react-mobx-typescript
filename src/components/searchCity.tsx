@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { inject, observer } from 'mobx-react';
-import Map from 'react-map-gl';
+import Map, { FullscreenControl, NavigationControl, ScaleControl, ViewState } from 'react-map-gl';
 import GeocoderControl from './geocoder-control';
 import { IViewport, IWeatherStoreProps } from '../interfaces/interfaces';
 
@@ -13,7 +13,7 @@ const SearchCity = inject('WeatherStore')(
       height: 'calc(50vh)',
     };
 
-    const [viewport, setViewport] = useState<IViewport>({
+    const [viewport, setViewport] = useState({
       latitude: 49.3,
       longitude: 19.96667,
       zoom: 6,
@@ -26,15 +26,12 @@ const SearchCity = inject('WeatherStore')(
         initialViewState={{ ...viewport }}
         style={styles}
         mapStyle="mapbox://styles/mapbox/streets-v11"
-        onViewportChange={(nextViewport: IViewport): void =>
-          setViewport(nextViewport ?? {})
-        }
         mapboxAccessToken={mapboxToken}
+        attributionControl={false}
       >
-        <GeocoderControl
-          mapboxAccessToken={mapboxToken as string}
-          position="top-left"
-        />
+        <GeocoderControl mapboxAccessToken={mapboxToken as string} position="top-left" />
+        <FullscreenControl />
+        <NavigationControl />
       </Map>
     );
   })

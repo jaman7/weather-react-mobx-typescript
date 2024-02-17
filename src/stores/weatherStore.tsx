@@ -1,16 +1,6 @@
-import {
-  observable,
-  configure,
-  makeObservable,
-  action,
-  runInAction,
-} from 'mobx';
+import { observable, configure, makeObservable, action, runInAction } from 'mobx';
 import axios from 'axios';
-import {
-  ISearchResults,
-  IWeatherData,
-  IWeatherStore,
-} from '../interfaces/interfaces';
+import { ISearchResults, IWeatherData, IWeatherStore } from '../interfaces/interfaces';
 
 axios.defaults.baseURL = 'https://api.openweathermap.org/data/2.5/';
 axios.defaults.responseType = 'json';
@@ -32,8 +22,7 @@ class WeatherStore implements IWeatherStore {
 
   errorMsg: string = '';
 
-  mapboxToken: string =
-    'pk.eyJ1IjoiamFtYW43IiwiYSI6ImNqbmV0bTFrczBrZG8zcm80Y2h4ZGF1ajQifQ.8aCc8P2-eq4hqman9k0E7g';
+  mapboxToken: string = 'pk.eyJ1IjoiamFtYW43IiwiYSI6ImNqbmV0bTFrczBrZG8zcm80Y2h4ZGF1ajQifQ.8aCc8P2-eq4hqman9k0E7g';
 
   searchResults: ISearchResults = {
     city: 'Zakopane',
@@ -58,27 +47,11 @@ class WeatherStore implements IWeatherStore {
     'December',
   ];
 
-  days: string[] = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+  days: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  weatherConditions: string[] = [
-    'Hight',
-    'Wind',
-    'Sunrise',
-    'Low',
-    'Rain',
-    'Sunset',
-  ];
+  weatherConditions: string[] = ['Hight', 'Wind', 'Sunrise', 'Low', 'Rain', 'Sunset'];
 
-  exists = (x: unknown): boolean =>
-    x !== null || typeof x !== 'undefined' || x !== '';
+  exists = (x: unknown): boolean => x !== null || typeof x !== 'undefined' || x !== '';
 
   sunsetSunrise = (utc: number | null): string => {
     return utc ? new Date(utc * 1000).toLocaleTimeString().slice(0, 5) : '';
@@ -92,36 +65,21 @@ class WeatherStore implements IWeatherStore {
 
       const weather = await axios.get(`weather?q=${city}${urloptions}`);
       const forecast = await axios.get(`forecast?q=${city}${urloptions}`);
-      const forecast7 = await axios.get(
-        `onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${apikey}`
-      );
+      const forecast7 = await axios.get(`onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${apikey}`);
       const weatherRequests = weather.data;
       const forecastRequests = forecast.data;
       const forecastRequests7 = forecast7.data;
 
-      const weatherAll = await Promise.all([
-        weatherRequests,
-        forecastRequests,
-        forecastRequests7,
-      ]);
+      const weatherAll = await Promise.all([weatherRequests, forecastRequests, forecastRequests7]);
 
       const currentDate = new Date();
-      const date = `${
-        this.days?.[currentDate?.getDay()]
-      } ${currentDate.getDate()} ${this.months?.[currentDate?.getMonth()]}`;
+      const date = `${this.days?.[currentDate?.getDay()]} ${currentDate.getDate()} ${this.months?.[currentDate?.getMonth()]}`;
 
       const sunset = this.sunsetSunrise(weatherAll[0].sys.sunset);
       const sunrise = this.sunsetSunrise(weatherAll[0].sys.sunrise);
 
       const [data1, data2, data3] = weatherAll || [];
-      const {
-        name,
-        sys,
-        weather: weatherRes,
-        main,
-        clouds,
-        wind,
-      } = data1 || {};
+      const { name, sys, weather: weatherRes, main, clouds, wind } = data1 || {};
 
       const weatherDataPayload: IWeatherData = {
         city: name,
@@ -143,14 +101,13 @@ class WeatherStore implements IWeatherStore {
         daily: data3?.daily ?? [],
       };
 
-      console.log(weatherDataPayload);
-
       runInAction(() => {
         this.isLoading = false;
         this.weatherInfo = true;
         this.weatherData = weatherDataPayload;
         this.error = false;
       });
+      console.log(this.weatherData);
     } catch (error) {
       this.weatherInfo = true;
       this.isLoading = false;

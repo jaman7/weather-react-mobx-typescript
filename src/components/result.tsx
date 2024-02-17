@@ -54,14 +54,7 @@ const Result = inject('WeatherStore')(
       return el ? Math.floor((el ?? 0) * 1) / 1 : 0;
     };
 
-    const box2Param = [
-      `${getMathFloor(highestTemp)}°`,
-      `${wind} m/s`,
-      sunrise,
-      `${getMathFloor(lowestTemp)}°`,
-      `${humidity}%`,
-      sunset,
-    ];
+    const box2Param = [`${getMathFloor(highestTemp)}°`, `${wind} m/s`, sunrise, `${getMathFloor(lowestTemp)}°`, `${humidity}%`, sunset];
 
     return (
       <>
@@ -104,10 +97,7 @@ const Result = inject('WeatherStore')(
 
           <div className="col-12">
             <div className="box3">
-              <ScrollContainer
-                hideScrollbars={false}
-                className="scroll-container"
-              >
+              <ScrollContainer hideScrollbars={false} className="scroll-container">
                 {forecast &&
                   forecast.map((el, i) => (
                     <Forecast

@@ -147,11 +147,11 @@ export interface IWeatherStore {
 }
 
 export interface IViewport {
-  latitude?: number | undefined | null;
-  longitude?: number | undefined | null;
-  zoom?: number | undefined | null;
-  bearing?: number | undefined | null;
-  pitch?: number | undefined | null;
+  latitude?: number;
+  longitude?: number;
+  zoom?: number;
+  bearing?: number;
+  pitch?: number;
   [name: string]: any;
 }
 
@@ -159,10 +159,7 @@ export type IWeatherStoreProps = {
   WeatherStore?: IWeatherStore;
 };
 
-export type GeocoderControlProps = Omit<
-  IWeatherStoreProps & GeocoderOptions,
-  'accessToken' | 'mapboxgl' | 'marker'
-> & {
+export type GeocoderControlProps = Omit<IWeatherStoreProps & GeocoderOptions, 'accessToken' | 'mapboxgl' | 'marker'> & {
   mapboxAccessToken?: string | undefined;
   marker?: boolean | Omit<MarkerProps, 'longitude' | 'latitude'>;
   position?: ControlPosition;

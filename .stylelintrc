@@ -4,10 +4,6 @@
     "stylelint-config-standard-scss"
   ],
   "rules": {
-    "at-rule-name-case": "lower",
-    "at-rule-name-space-after": "always-single-line",
-    "at-rule-semicolon-newline-after": "always",
-    "at-rule-no-unknown": null,
     "value-keyword-case": [
       "lower",
       {
@@ -17,7 +13,6 @@
         ]
       }
     ],
-    "string-quotes": "double",
     "scss/dollar-variable-pattern": [
       "[a-z][a-zA-Z]+",
       {
@@ -26,6 +21,6 @@
     ],
     "no-descending-specificity": null,
     "selector-class-pattern": null,
-    "scss/no-global-function-names": null,
+    "scss/no-global-function-names": null
   }
 }
