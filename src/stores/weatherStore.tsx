@@ -4,7 +4,7 @@ import { ISearchResults, IWeatherData, IWeatherStore } from '../interfaces/inter
 
 axios.defaults.baseURL = 'https://api.openweathermap.org/data/2.5/';
 axios.defaults.responseType = 'json';
-const apikey = 'mull'; // set api key
+const apikey = 'ae98d58d517252f2065829367d320dbb';
 const urloptions = `&APPID=${apikey}&units=metric`;
 
 configure({
@@ -22,7 +22,7 @@ class WeatherStore implements IWeatherStore {
 
   errorMsg: string = '';
 
-  mapboxToken: string = 'null'; // set api key
+  mapboxToken: string = 'pk.eyJ1IjoiamFtYW43IiwiYSI6ImNqbmV0bTFrczBrZG8zcm80Y2h4ZGF1ajQifQ.8aCc8P2-eq4hqman9k0E7g';
 
   searchResults: ISearchResults = {
     city: 'Zakopane',
