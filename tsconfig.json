@@ -21,12 +21,6 @@
     "experimentalDecorators": true
   },
   "include": ["src", ".eslintrc.cjs", ".vite.config.ts"],
-  "paths": {
-    "App/*": ["*"],
-    "Components/*": ["components/*"],
-    "Store/*": ["store/*"],
-    "Helpers/*": ["helpers/*"]
-  },
   "references": [
     {
       "path": "./tsconfig.node.json"
